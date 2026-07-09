@@ -1,0 +1,24 @@
+@startuml ModeloConceptual_v0_2
+
+title Modelo Conceptual v0.2
+
+entity Cliente
+entity Pedido
+entity Producto
+entity Categoria
+entity DetallePedido
+entity Resena
+
+Cliente ||--o{ Pedido : realiza
+
+Pedido ||--o{ DetallePedido : contiene
+
+Producto ||--o{ DetallePedido : pertenece
+
+Categoria ||--o{ Producto : clasifica
+
+Cliente ||--o{ Resena : escribe
+
+Producto ||--o{ Resena : recibe
+
+@enduml

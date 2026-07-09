@@ -81,3 +81,11 @@ Construir la primera versión del modelo conceptual a partir del análisis previ
 
 ### Resultado
 Se obtuvo una versión preliminar del modelo conceptual que servirá como base para futuras correcciones.
+
+## Modelo Conceptual v0.2
+
+Se analizaron las reglas de negocio para determinar las relaciones entre las entidades identificadas previamente.
+
+Durante esta etapa se detectó una relación muchos a muchos entre Pedido y Producto, por lo que se incorporó la entidad asociativa DetallePedido.
+
+El modelo conceptual fue actualizado incorporando las relaciones y sus cardinalidades.
