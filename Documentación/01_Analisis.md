@@ -126,3 +126,82 @@ El siguiente flujo representa el proceso principal de compra dentro de la tienda
 
 ### Conclusión
 El análisis de procesos permitió identificar las operaciones principales que la base de datos deberá soportar. A partir de estos procesos será posible determinar las entidades, relaciones y reglas de negocio que conformarán el modelo entidad-relación.
+
+## 4. Identificación de entidades candidatas
+
+### Introducción
+Con base en el análisis de actores y procesos del negocio, se identificaron los principales objetos de información que deberán almacenarse de forma permanente en la base de datos. Estos objetos constituyen las entidades candidatas del modelo conceptual.
+Cada entidad fue seleccionada por representar información relevante para el funcionamiento de la tienda en línea y por participar directamente en los procesos definidos durante el análisis.
+
+### Entidades identificadas
+
+#### Cliente
+Representa a las personas que realizan compras dentro de la tienda y que pueden registrar reseñas sobre los productos adquiridos.
+
+**Justificación:**
+El sistema debe almacenar la información de cada cliente para mantener el historial de compras y permitir la identificación del propietario de cada pedido y reseña.
+
+#### Producto
+Representa los artículos disponibles para su venta.
+
+**Justificación:**
+Es necesario almacenar la información de cada producto para controlar el inventario, registrar ventas y mostrar el catálogo disponible.
+
+#### Categoría
+Permite clasificar los productos según su tipo.
+
+**Justificación:**
+Facilita la organización del catálogo y permite realizar búsquedas por categoría, una de las consultas solicitadas en el proyecto.
+
+#### Pedido
+Representa cada compra realizada por un cliente.
+
+**Justificación:**
+Permite registrar la fecha, estado y propietario de cada compra realizada.
+
+#### DetallePedido
+Representa cada producto incluido dentro de un pedido.
+
+**Justificación:**
+Se identifica como una entidad asociativa necesaria para resolver la relación muchos a muchos entre Pedido y Producto.
+Además, permite almacenar información específica de cada producto vendido, como la cantidad y el precio unitario.
+
+#### Reseña
+Representa la opinión de un cliente sobre un producto adquirido.
+
+**Justificación:**
+El proyecto requiere registrar calificaciones y comentarios únicamente de clientes que hayan comprado previamente el producto.
+
+### Entidades descartadas
+Durante el análisis también surgieron algunos conceptos que inicialmente parecían entidades, pero que finalmente no se incorporaron al modelo debido a que no forman parte del alcance del proyecto.
+
+- **Carrito**: El profesor no solicita gestionar carritos de compra.
+- **Pago**: No existen requerimientos relacionados con métodos de pago.
+- **Envío**: El proyecto únicamente administra pedidos.
+- **Proveedor**: No se contempla la gestión de proveedores.
+
+### Trazabilidad
+
+| Proceso del negocio           | Entidad obtenida |
+|------------------------------|------------------|
+| Registrar cliente            | Cliente          |
+| Administrar productos        | Producto         |
+| Clasificar productos         | Categoría        |
+| Realizar pedido              | Pedido           |
+| Registrar productos vendidos | DetallePedido    |
+| Registrar opinión            | Reseña           |
+
+Para justificar la relación entre los procesos del negocio y las entidades identificadas, se presenta la siguiente matriz de trazabilidad:
+
+### Conclusión
+Como resultado del análisis se identificaron seis entidades principales: **Cliente**, **Producto**, **Categoría**, **Pedido**, **DetallePedido** y **Reseña**.
+Estas entidades servirán como base para la construcción del primer modelo conceptual.
+
+## 5. Modelo conceptual versión 1
+
+Con base en el análisis de actores, procesos y entidades candidatas, se elaboró una primera versión del modelo conceptual. Esta versión representa un avance preliminar del diseño y tiene como objetivo visualizar las entidades principales identificadas durante el análisis.
+
+En esta etapa se incluyeron las entidades Cliente, Producto, Pedido, Categoría y Reseña, junto con sus relaciones básicas. Esta versión aún es incompleta, ya que posteriormente se realizarán ajustes para incorporar correctamente la entidad asociativa DetallePedido y definir con mayor precisión las cardinalidades y atributos del modelo.
+
+El propósito de conservar esta versión es documentar la evolución del diseño y mostrar las correcciones realizadas durante el desarrollo del proyecto.
+

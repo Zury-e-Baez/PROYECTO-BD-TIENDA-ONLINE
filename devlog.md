@@ -50,3 +50,34 @@ Identificar los procesos principales del negocio que soportará la base de datos
 ### Resultado
 
 Se identificaron las operaciones que la base de datos deberá soportar. Este análisis permitirá obtener las entidades y relaciones necesarias para el diseño conceptual del modelo entidad-relación.
+
+## Día 1 (Continuación)
+
+### Objetivo
+
+Identificar las entidades candidatas que formarán parte del modelo conceptual.
+
+### Actividades realizadas
+
+- Se analizaron los objetos de información generados por los procesos del negocio.
+- Se identificaron las entidades principales del sistema.
+- Se justificó la inclusión de cada entidad.
+- Se descartaron conceptos que no pertenecen al alcance del proyecto.
+- Se elaboró una matriz de trazabilidad entre procesos y entidades.
+
+### Resultado
+
+Se definieron seis entidades candidatas: Cliente, Producto, Categoría, Pedido, DetallePedido y Reseña, las cuales servirán como base para construir el primer modelo conceptual.
+
+## Día 1 (Continuación)
+
+### Objetivo
+Construir la primera versión del modelo conceptual a partir del análisis previo.
+
+### Actividades realizadas
+- Se identificaron las entidades candidatas del sistema.
+- Se elaboró una primera versión del diagrama conceptual.
+- Se documentó que el modelo aún está en proceso de ajuste.
+
+### Resultado
+Se obtuvo una versión preliminar del modelo conceptual que servirá como base para futuras correcciones.

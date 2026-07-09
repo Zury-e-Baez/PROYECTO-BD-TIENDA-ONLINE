@@ -1,0 +1,15 @@
+@startuml
+
+title Diagrama Conceptual Versión_1 
+entity Cliente
+entity Producto
+entity Pedido
+entity Categoria
+entity Resena
+
+Cliente ||--o{ Pedido : realiza
+Categoria ||--o{ Producto : clasifica
+Cliente ||--o{ Resena : escribe
+Producto ||--o{ Resena : recibe
+
+@enduml
