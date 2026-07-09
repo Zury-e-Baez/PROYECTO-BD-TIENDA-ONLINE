@@ -38,3 +38,22 @@ Asimismo, deberá soportar consultas, procedimientos almacenados, restricciones 
 
 El análisis previo del problema permite comprender las necesidades del sistema antes de iniciar el diseño del modelo de datos.
 Realizar esta etapa evita errores de modelado, facilita la identificación correcta de las entidades y relaciones del sistema y proporciona una base sólida para las siguientes fases del proyecto.
+
+## 2. Identificación de actores
+
+### Actor 1 – Cliente
+Es la persona que realiza compras dentro de la tienda en línea.
+El cliente puede consultar productos disponibles, realizar pedidos y registrar reseñas sobre los productos adquiridos.
+Además, su información personal será almacenada para mantener un historial de compras.
+
+### Actor 2 – Administrador
+Es el encargado de administrar el catálogo de productos y supervisar el funcionamiento de la tienda.
+Puede agregar nuevos productos, modificar precios, actualizar existencias, administrar categorías y consultar la información almacenada en la base de datos.
+
+### Actor 3 – Sistema
+Representa los procesos automáticos que garantizan la integridad de la información.
+Entre sus funciones se encuentran verificar el stock disponible antes de registrar un pedido, actualizar automáticamente las existencias después de una venta y validar reglas de negocio mediante procedimientos almacenados y triggers.
+
+### Conclusión
+Después del análisis se identifican tres actores principales que interactúan directa o indirectamente con la base de datos: **cliente**, **administrador** y **sistema**.
+Cada uno genera información que será considerada durante el diseño conceptual del modelo entidad–relación.

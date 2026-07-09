@@ -9,8 +9,8 @@ Profesor: Guillermo Monroy Rodríguez
 
 ## Descripción del proyecto
 
-Este repositorio contiene el desarrollo de una base de datos relacional para una tienda en línea.  
-El sistema está diseñado para administrar clientes, productos, categorías, pedidos, detalles de pedido y reseñas de productos, asegurando la integridad y consistencia de la información conforme a los requerimientos de la materia.  
+Este repositorio contiene el desarrollo de una base de datos relacional para una tienda en línea.
+El sistema está diseñado para administrar clientes, productos, categorías, pedidos, detalles de pedido y reseñas de productos, asegurando la integridad y consistencia de la información conforme a los requerimientos de la materia.
 
 ---
 
@@ -21,7 +21,7 @@ Diseñar e implementar una base de datos normalizada en MySQL que soporte las op
 - Registrar ventas y pedidos.
 - Consultar productos disponibles y su inventario.
 - Administrar categorías de productos.
-- Almacenar reseñas de productos realizadas por clientes que hayan comprado.  
+- Almacenar reseñas de productos realizadas por clientes que hayan comprado.
 
 ---
 
