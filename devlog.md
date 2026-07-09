@@ -34,3 +34,19 @@ Identificar los actores que interactúan con el sistema.
 ### Resultado
 
 Se identificaron tres actores principales: Cliente, Administrador y Sistema. Estos servirán como base para identificar los procesos y posteriormente las entidades del modelo conceptual.
+
+## Día 1 (Continuación)
+
+### Objetivo
+
+Identificar los procesos principales del negocio que soportará la base de datos.
+
+### Actividades realizadas
+
+- Se analizaron las operaciones realizadas por el cliente, el administrador y el sistema.
+- Se documentaron los procesos de negocio.
+- Se elaboró un diagrama de flujo del proceso principal de compra.
+
+### Resultado
+
+Se identificaron las operaciones que la base de datos deberá soportar. Este análisis permitirá obtener las entidades y relaciones necesarias para el diseño conceptual del modelo entidad-relación.

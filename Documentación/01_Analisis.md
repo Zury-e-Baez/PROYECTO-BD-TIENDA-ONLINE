@@ -57,3 +57,72 @@ Entre sus funciones se encuentran verificar el stock disponible antes de registr
 ### Conclusión
 Después del análisis se identifican tres actores principales que interactúan directa o indirectamente con la base de datos: **cliente**, **administrador** y **sistema**.
 Cada uno genera información que será considerada durante el diseño conceptual del modelo entidad–relación.
+
+## 3. Identificación de procesos del negocio
+
+### Introducción
+Una vez identificados los actores del sistema, se analizaron las actividades que cada uno realiza dentro de la tienda en línea. Este análisis permite comprender el flujo de información que deberá soportar la base de datos y facilita la identificación de las entidades y relaciones necesarias para el diseño del modelo conceptual.
+
+### Procesos del Cliente
+El cliente interactúa con el sistema realizando las siguientes actividades:
+
+- Consultar el catálogo de productos.
+- Buscar productos por categoría.
+- Realizar un pedido.
+- Consultar el historial de pedidos.
+- Registrar una reseña de un producto adquirido.
+
+### Procesos del Administrador
+El administrador es responsable de la gestión de la información del sistema mediante las siguientes actividades:
+
+- Registrar nuevos productos.
+- Actualizar la información de productos.
+- Administrar las categorías.
+- Consultar pedidos realizados.
+- Supervisar el inventario.
+- Consultar reportes de ventas.
+
+### Procesos automáticos del Sistema
+El sistema ejecutará automáticamente diversos procesos para mantener la integridad de la información:
+
+- Verificar que exista stock suficiente antes de registrar un pedido.
+- Descontar automáticamente el stock cuando se registra una venta.
+- Validar que un cliente solo pueda registrar reseñas de productos comprados.
+- Verificar que no existan productos duplicados con el mismo nombre y categoría.
+- Generar reportes de productos con bajo inventario.
+
+### Flujo principal del negocio
+El siguiente flujo representa el proceso principal de compra dentro de la tienda en línea:
+
+
+                CLIENTE
+                    │
+        Consulta productos
+                    │
+                    ▼
+            Selecciona producto
+                    │
+                    ▼
+             Realiza pedido
+                    │
+                    ▼
+     Sistema verifica existencias
+                    │
+          ┌─────────┴─────────┐
+          │                   │
+      Hay stock          No hay stock
+          │                   │
+          ▼                   ▼
+ Registra pedido      Cancela operación
+          │
+          ▼
+ Actualiza inventario
+          │
+          ▼
+ Cliente recibe pedido
+          │
+          ▼
+ Registra reseña
+
+### Conclusión
+El análisis de procesos permitió identificar las operaciones principales que la base de datos deberá soportar. A partir de estos procesos será posible determinar las entidades, relaciones y reglas de negocio que conformarán el modelo entidad-relación.
