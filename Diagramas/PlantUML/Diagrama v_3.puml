@@ -1,0 +1,57 @@
+@startuml
+title Modelo Conceptual Final
+
+entity Cliente{
+id_cliente
+nombre
+correo
+telefono
+direccion
+}
+
+entity Pedido{
+id_pedido
+fecha
+total
+estado
+}
+
+entity Producto{
+id_producto
+nombre
+descripcion
+precio
+stock
+}
+
+entity Categoria{
+id_categoria
+nombre
+descripcion
+}
+
+entity DetallePedido{
+cantidad
+precio_unitario
+}
+
+entity Reseña{
+id_reseña
+calificacion
+comentario
+fecha
+}
+
+Cliente ||--o{ Pedido
+
+Pedido ||--|{ DetallePedido
+
+Producto ||--o{ DetallePedido
+
+Categoria ||--o{ Producto
+
+Cliente ||--o{ Reseña
+
+Producto ||--o{ Reseña
+
+@enduml

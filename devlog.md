@@ -89,3 +89,13 @@ Se analizaron las reglas de negocio para determinar las relaciones entre las ent
 Durante esta etapa se detectó una relación muchos a muchos entre Pedido y Producto, por lo que se incorporó la entidad asociativa DetallePedido.
 
 El modelo conceptual fue actualizado incorporando las relaciones y sus cardinalidades.
+
+# Día 1 (Continación)
+
+## Modelo Conceptual Final
+
+Se incorporaron los atributos principales de cada entidad identificada durante el análisis.
+
+También se revisaron nuevamente las relaciones entre entidades para asegurar que el modelo conceptual representara correctamente las reglas de negocio de la tienda en línea.
+
+Esta versión constituye el modelo conceptual definitivo y servirá como base para el diseño lógico de la base de datos.

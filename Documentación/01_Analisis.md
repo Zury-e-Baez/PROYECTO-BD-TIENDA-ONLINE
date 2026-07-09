@@ -197,11 +197,4 @@ Para justificar la relación entre los procesos del negocio y las entidades iden
 Como resultado del análisis se identificaron seis entidades principales: **Cliente**, **Producto**, **Categoría**, **Pedido**, **DetallePedido** y **Reseña**.
 Estas entidades servirán como base para la construcción del primer modelo conceptual.
 
-## 5. Modelo conceptual versión 1
-
-Con base en el análisis de actores, procesos y entidades candidatas, se elaboró una primera versión del modelo conceptual. Esta versión representa un avance preliminar del diseño y tiene como objetivo visualizar las entidades principales identificadas durante el análisis.
-
-En esta etapa se incluyeron las entidades Cliente, Producto, Pedido, Categoría y Reseña, junto con sus relaciones básicas. Esta versión aún es incompleta, ya que posteriormente se realizarán ajustes para incorporar correctamente la entidad asociativa DetallePedido y definir con mayor precisión las cardinalidades y atributos del modelo.
-
-El propósito de conservar esta versión es documentar la evolución del diseño y mostrar las correcciones realizadas durante el desarrollo del proyecto.
 
