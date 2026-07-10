@@ -1,4 +1,4 @@
-# Diccionario de Datos (Conceptual)
+# Justificación de los datos (Conceptual)
 
 No es un diccionario técnico.  
 Es un documento donde se justifican los atributos.

@@ -51,7 +51,7 @@ Identificar los procesos principales del negocio que soportará la base de datos
 
 Se identificaron las operaciones que la base de datos deberá soportar. Este análisis permitirá obtener las entidades y relaciones necesarias para el diseño conceptual del modelo entidad-relación.
 
-## Día 1 (Continuación)
+## Día 2 
 
 ### Objetivo
 
@@ -69,7 +69,7 @@ Identificar las entidades candidatas que formarán parte del modelo conceptual.
 
 Se definieron seis entidades candidatas: Cliente, Producto, Categoría, Pedido, DetallePedido y Reseña, las cuales servirán como base para construir el primer modelo conceptual.
 
-## Día 1 (Continuación)
+## Día 2 (Continuación)
 
 ### Objetivo
 Construir la primera versión del modelo conceptual a partir del análisis previo.
@@ -90,7 +90,7 @@ Durante esta etapa se detectó una relación muchos a muchos entre Pedido y Prod
 
 El modelo conceptual fue actualizado incorporando las relaciones y sus cardinalidades.
 
-# Día 1 (Continación)
+# Día 2 (Continación)
 
 ## Modelo Conceptual Final
 
@@ -99,3 +99,14 @@ Se incorporaron los atributos principales de cada entidad identificada durante e
 También se revisaron nuevamente las relaciones entre entidades para asegurar que el modelo conceptual representara correctamente las reglas de negocio de la tienda en línea.
 
 Esta versión constituye el modelo conceptual definitivo y servirá como base para el diseño lógico de la base de datos.
+
+## Diseño lógico
+
+# Día 2 (Continuación)
+Se transformó el modelo conceptual al modelo lógico relacional.
+
+Se definieron las seis tablas del sistema junto con sus atributos, claves primarias y claves foráneas.
+
+Se elaboró el diagrama EER utilizando MySQL Workbench y se verificó que las relaciones respetaran las reglas de negocio del proyecto.
+
+Finalmente se documentó el modelo relacional y se identificaron las claves candidatas del diseño.
