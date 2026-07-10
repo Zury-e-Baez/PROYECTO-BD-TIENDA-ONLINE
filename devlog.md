@@ -110,3 +110,23 @@ Se definieron las seis tablas del sistema junto con sus atributos, claves primar
 Se elaboró el diagrama EER utilizando MySQL Workbench y se verificó que las relaciones respetaran las reglas de negocio del proyecto.
 
 Finalmente se documentó el modelo relacional y se identificaron las claves candidatas del diseño.
+
+## Diseño lógico (Versión final)
+## Día 2
+
+### Objetivo
+Refinar y consolidar el Diseño Lógico (Punto 2.3) del sistema, alineando la estructura relacional con las reglas de negocio y preparando el modelo para su implementación física en MySQL Workbench.
+
+### Actividades realizadas
+- **Ajuste de nomenclatura:** Se estandarizaron los nombres de todas las entidades a formato plural (`Clientes`, `Productos`, `Categorias`, `Pedidos`, `Detalles_Pedido`, `Reseñas`) para coincidir con los requerimientos del proyecto.
+- **Eliminación de atributos derivados:** Se eliminó el campo `total` de la tabla `Pedidos`, ya que es un valor calculable a partir de `Detalles_Pedido`, evitando redundancias.
+- **Definición de Claves Candidatas (AK):** Se identificaron e implementaron (vía índices `UNIQUE` en Workbench) las restricciones de unicidad para:
+  - `correo` en Clientes.
+  - La combinación `(nombre, id_categoria)` en Productos.
+  - La combinación `(id_pedido, id_producto)` en Detalles_Pedido.
+- **Definición de Tipos de Datos y Restricciones de Dominio:** Se documentaron los tipos de datos exactos a usar en SQL (`VARCHAR`, `DECIMAL(10,2)`, `ENUM`) y se prepararon las restricciones `CHECK` para garantizar stock no negativo y calificaciones entre 1 y 5.
+- **Modelado Visual:** Se construyó el diagrama lógico final utilizando MySQL Workbench, aplicando todas las correcciones estructurales.
+- **Documentación:** Se redactó y finalizó la documentación correspondiente al punto 2.3 (Diseño Lógico).
+
+### Resultado
+El modelo lógico relacional está 100% estructurado, validado y plasmado visualmente en Workbench. El diseño está listo para proceder con la generación de los scripts DDL (SQL) y la posterior documentación formal de la normalización.

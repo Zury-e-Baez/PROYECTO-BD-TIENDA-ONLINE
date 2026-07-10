@@ -2,26 +2,39 @@
 
 ## Introducción
 
-Una vez concluido el modelo conceptual, se procedió a transformarlo al modelo lógico relacional.
+Una vez concluido el modelo conceptual, se procedió a transformarlo en un modelo lógico relacional.
 
-Durante esta etapa se identifican las tablas que conformarán la base de datos, así como las claves primarias, claves foráneas y restricciones necesarias para conservar la integridad de la información.
+Durante esta etapa, las entidades identificadas previamente fueron convertidas en tablas y se definieron las claves primarias, claves foráneas y claves candidatas necesarias para representar las relaciones del sistema y conservar la integridad de la información.
 
-El diseño lógico representa la estructura que posteriormente será implementada en MySQL.
+También se identificaron las restricciones de integridad y las reglas de negocio que deberán considerarse durante la implementación de la base de datos.
+
+El diseño lógico constituye la estructura relacional que servirá como base para la posterior implementación de la base de datos en MySQL.
 
 ## Transformación del Modelo Conceptual
 
-Cada entidad identificada en el análisis fue convertida en una tabla del modelo relacional.
+El modelo conceptual desarrollado en la etapa anterior estaba compuesto por las entidades Cliente, Producto, Categoría, Pedido, DetallePedido y Reseña.
 
-Las relaciones uno a muchos fueron implementadas mediante claves foráneas.
+Para obtener el modelo lógico, cada entidad fue transformada en una tabla del modelo relacional.
 
-La relación muchos a muchos entre Pedido y Producto fue resuelta mediante la tabla DetallePedido.
+Las relaciones uno a muchos fueron implementadas mediante claves foráneas ubicadas en las tablas correspondientes.
 
-El resultado es un modelo compuesto por seis tablas relacionadas entre sí.
+La relación muchos a muchos existente entre Pedido y Producto fue resuelta mediante la tabla Detalles_Pedido. Esta tabla permite representar cada producto incluido en un pedido y almacenar los atributos propios de dicha relación: cantidad y precio_unitario.
+
+Como resultado de esta transformación, el modelo lógico quedó compuesto por seis tablas relacionadas entre sí:
+
+- Clientes.
+- Pedidos.
+- Productos.
+- Categorias.
+- Detalles_Pedido.
+- Reseñas.
 
 ## Modelo Relacional
 
+El esquema relacional obtenido es el siguiente:
+
 ```text
-CLIENTE
+CLIENTES
 ---------
 PK id_cliente
 nombre
@@ -29,15 +42,14 @@ correo
 telefono
 direccion
 
-PEDIDO
+PEDIDOS
 ---------
 PK id_pedido
 FK id_cliente
-fecha
-total
+fecha_pedido
 estado
 
-PRODUCTO
+PRODUCTOS
 ---------
 PK id_producto
 FK id_categoria
@@ -46,21 +58,21 @@ descripcion
 precio
 stock
 
-CATEGORIA
+CATEGORIAS
 ---------
 PK id_categoria
 nombre
 descripcion
 
-DETALLE_PEDIDO
+DETALLES_PEDIDO
 ---------
-PK (id_detalle_pedido)
+PK id_detalle_pedido
 FK id_pedido
 FK id_producto
 cantidad
 precio_unitario
 
-RESEÑA
+RESEÑAS
 ---------
 PK id_reseña
 FK id_cliente
@@ -70,110 +82,495 @@ comentario
 fecha
 ```
 
+## Descripción de las Tablas
+
+### Clientes
+
+La tabla Clientes almacena la información correspondiente a los clientes registrados en la tienda en línea.
+
+```text
+CLIENTES
+---------
+PK id_cliente
+nombre
+correo
+telefono
+direccion
+```
+
+La clave primaria `id_cliente` identifica de manera única a cada cliente.
+
+El atributo `correo` representa una clave candidata debido a que cada dirección de correo electrónico deberá ser única dentro del sistema. Esta condición se representa mediante una restricción de unicidad.
+
+Los atributos `nombre`, `correo`, `telefono` y `direccion` almacenan la información descriptiva correspondiente a cada cliente.
+
+### Pedidos
+
+La tabla Pedidos almacena la información general de los pedidos realizados por los clientes.
+
+```text
+PEDIDOS
+---------
+PK id_pedido
+FK id_cliente
+fecha_pedido
+estado
+```
+
+La clave primaria `id_pedido` identifica de manera única cada pedido.
+
+La clave foránea `id_cliente` establece la relación con la tabla Clientes y permite identificar al cliente que realizó el pedido.
+
+El atributo `fecha_pedido` almacena la fecha en la que se registra el pedido.
+
+El atributo `estado` permite representar las etapas establecidas para un pedido, como pendiente, enviado y entregado.
+
+El total del pedido no se almacena como atributo en la tabla Pedidos, debido a que puede calcularse a partir de los registros asociados en Detalles_Pedido mediante la cantidad y el precio_unitario de cada producto.
+
+El valor correspondiente al total de un pedido puede obtenerse mediante la siguiente operación:
+
+```text
+SUM(cantidad × precio_unitario)
+```
+
+Esta decisión evita almacenar un valor derivado que podría volverse inconsistente con el contenido real de los detalles del pedido.
+
+### Productos
+
+La tabla Productos almacena la información correspondiente a los productos disponibles en la tienda.
+
+```text
+PRODUCTOS
+---------
+PK id_producto
+FK id_categoria
+nombre
+descripcion
+precio
+stock
+```
+
+La clave primaria `id_producto` identifica de manera única cada producto.
+
+La clave foránea `id_categoria` relaciona cada producto con la categoría a la que pertenece.
+
+La combinación de los atributos `nombre` e `id_categoria` se considera una clave candidata, debido a que no deberá existir más de un producto con el mismo nombre dentro de una misma categoría.
+
+Los atributos `descripcion`, `precio` y `stock` almacenan las características propias de cada producto.
+
+### Categorias
+
+La tabla Categorias almacena las categorías utilizadas para organizar los productos de la tienda.
+
+```text
+CATEGORIAS
+---------
+PK id_categoria
+nombre
+descripcion
+```
+
+La clave primaria `id_categoria` identifica de manera única cada categoría.
+
+Cada categoría puede agrupar múltiples productos, mientras que cada producto pertenece a una categoría.
+
+Los atributos `nombre` y `descripcion` almacenan la información descriptiva correspondiente a cada categoría.
+
+### Detalles_Pedido
+
+La tabla Detalles_Pedido resuelve la relación muchos a muchos existente entre Pedidos y Productos.
+
+```text
+DETALLES_PEDIDO
+---------
+PK id_detalle_pedido
+FK id_pedido
+FK id_producto
+cantidad
+precio_unitario
+```
+
+La clave primaria `id_detalle_pedido` identifica de manera única cada registro del detalle.
+
+La clave foránea `id_pedido` indica el pedido al que pertenece el detalle, mientras que la clave foránea `id_producto` identifica el producto incluido.
+
+Los atributos `cantidad` y `precio_unitario` pertenecen al detalle específico de la compra.
+
+La cantidad no pertenece exclusivamente a un pedido ni exclusivamente a un producto, debido a que un mismo producto puede solicitarse en diferentes cantidades dentro de distintos pedidos.
+
+El atributo `precio_unitario` se almacena en Detalles_Pedido porque representa el precio aplicado al producto en el momento de la compra. De esta manera, los cambios posteriores en el precio actual almacenado en Productos no modifican la información correspondiente a pedidos realizados anteriormente.
+
+La combinación formada por `id_pedido` e `id_producto` constituye una clave candidata y se encuentra restringida mediante una condición de unicidad:
+
+```text
+(id_pedido, id_producto)
+```
+
+Esta restricción evita que un mismo producto aparezca más de una vez dentro del mismo pedido. En caso de requerirse varias unidades del mismo producto, la cantidad de unidades se representa mediante el atributo `cantidad`.
+
+### Reseñas
+
+La tabla Reseñas almacena las evaluaciones realizadas por los clientes sobre los productos.
+
+```text
+RESEÑAS
+---------
+PK id_reseña
+FK id_cliente
+FK id_producto
+calificacion
+comentario
+fecha
+```
+
+La clave primaria `id_reseña` identifica de manera única cada reseña.
+
+La clave foránea `id_cliente` identifica al cliente que realizó la reseña y la clave foránea `id_producto` identifica el producto evaluado.
+
+El atributo `calificacion` representa la evaluación asignada al producto y deberá encontrarse entre 1 y 5.
+
+El atributo `comentario` almacena la opinión escrita por el cliente y el atributo `fecha` registra la fecha correspondiente a la reseña.
+
+De acuerdo con las reglas de negocio del sistema, solamente podrán registrar reseñas los clientes que hayan comprado previamente el producto evaluado. Esta condición requiere comprobar información relacionada con pedidos y detalles de pedido, por lo que será validada durante la etapa de implementación correspondiente.
+
 ## Claves Primarias y Foráneas
-
-Las claves primarias permiten identificar de manera única cada registro dentro de una tabla.
-
-Las claves foráneas establecen la relación entre tablas y garantizan la integridad referencial de la base de datos.
 
 ### Claves Primarias
 
-- Cliente: id_cliente
-- Pedido: id_pedido
-- Producto: id_producto
-- Categoria: id_categoria
-- DetallePedido: id_detalle_pedido
-- Reseña: id_reseña
+Las claves primarias definidas en el modelo son las siguientes:
+
+- Clientes: `id_cliente`.
+- Pedidos: `id_pedido`.
+- Productos: `id_producto`.
+- Categorias: `id_categoria`.
+- Detalles_Pedido: `id_detalle_pedido`.
+- Reseñas: `id_reseña`.
+
+Cada clave primaria identifica de manera única los registros de su tabla correspondiente.
 
 ### Claves Foráneas
 
-Pedido.id_cliente → Cliente.id_cliente
+Las claves foráneas del modelo son las siguientes:
 
-Producto.id_categoria → Categoria.id_categoria
+```text
+Pedidos.id_cliente → Clientes.id_cliente
 
-DetallePedido.id_pedido → Pedido.id_pedido
+Productos.id_categoria → Categorias.id_categoria
 
-DetallePedido.id_producto → Producto.id_producto
+Detalles_Pedido.id_pedido → Pedidos.id_pedido
 
-Reseña.id_cliente → Cliente.id_cliente
+Detalles_Pedido.id_producto → Productos.id_producto
 
-Reseña.id_producto → Producto.id_producto
+Reseñas.id_cliente → Clientes.id_cliente
+
+Reseñas.id_producto → Productos.id_producto
+```
+
+Estas claves foráneas permiten establecer las relaciones entre las tablas y garantizarán la integridad referencial durante la implementación de la base de datos.
 
 ## Claves Candidatas
 
-Además de las claves primarias, se identificaron los siguientes atributos como posibles claves candidatas:
+Además de las claves primarias seleccionadas, se identificaron claves candidatas capaces de identificar de manera única determinados registros de acuerdo con las reglas de negocio del sistema.
 
-- Cliente: correo electrónico.
-- Categoria: nombre.
-- Producto: combinación (nombre, id_categoria).
+### Correo del cliente
 
-Las claves candidatas representan atributos que podrían identificar de forma única un registro, aunque finalmente no fueron seleccionados como claves primarias del modelo.
+```text
+Clientes.correo
+```
+
+El correo electrónico puede identificar de manera única a un cliente.
+
+Por esta razón, se estableció una restricción de unicidad sobre este atributo, evitando que dos clientes sean registrados con la misma dirección de correo electrónico.
+
+### Nombre y categoría del producto
+
+```text
+Productos(nombre, id_categoria)
+```
+
+La combinación del nombre del producto y su categoría permite identificar un producto dentro de una categoría específica.
+
+De acuerdo con la regla establecida para el modelo, no deberá existir más de un producto con el mismo nombre dentro de una misma categoría.
+
+Por esta razón, la combinación se encuentra definida mediante una restricción de unicidad.
+
+### Pedido y producto en el detalle
+
+```text
+Detalles_Pedido(id_pedido, id_producto)
+```
+
+Esta combinación identifica la participación de un producto dentro de un pedido específico.
+
+La restricción de unicidad evita que el mismo producto sea registrado más de una vez dentro del mismo pedido.
+
+Cuando un cliente solicita varias unidades del mismo producto, el número de unidades se almacena en el atributo `cantidad`.
 
 ## Descripción de las Relaciones
 
-El modelo lógico está compuesto por seis tablas relacionadas mediante claves foráneas que garantizan la integridad referencial de la información.
+El modelo lógico presenta las siguientes relaciones:
 
-Las relaciones implementadas son las siguientes:
+### Clientes y Pedidos
 
-- Un cliente puede realizar muchos pedidos, pero cada pedido pertenece a un único cliente.
+```text
+CLIENTES 1 -------- N PEDIDOS
+```
 
-- Una categoría puede contener múltiples productos, mientras que cada producto pertenece únicamente a una categoría.
+Un cliente puede realizar múltiples pedidos, mientras que cada pedido pertenece a un único cliente.
 
-- Un pedido puede contener varios productos y un mismo producto puede formar parte de diferentes pedidos. Esta relación muchos a muchos fue resuelta mediante la tabla DetallePedido.
+La relación se implementa mediante la clave foránea `id_cliente` almacenada en la tabla Pedidos.
 
-- Un cliente puede registrar varias reseñas sobre diferentes productos.
+### Categorias y Productos
 
-- Un producto puede recibir múltiples reseñas realizadas por distintos clientes.
+```text
+CATEGORIAS 1 -------- N PRODUCTOS
+```
 
-## Restricciones de Integridad
+Una categoría puede contener múltiples productos, mientras que cada producto pertenece a una categoría.
 
-Durante el diseño lógico se establecieron diversas restricciones para garantizar la consistencia de los datos.
+La relación se implementa mediante la clave foránea `id_categoria` almacenada en la tabla Productos.
 
-- Cada tabla posee una clave primaria que identifica de forma única cada registro.
+### Pedidos y Detalles_Pedido
 
-- Las claves foráneas garantizan la integridad referencial entre las tablas relacionadas.
+```text
+PEDIDOS 1 -------- N DETALLES_PEDIDO
+```
 
-- El precio de los productos y el precio_unitario del detalle del pedido utilizarán el tipo DECIMAL para evitar errores de precisión.
+Un pedido puede contener múltiples registros de detalle, mientras que cada detalle pertenece a un único pedido.
 
-- El correo electrónico del cliente deberá ser único dentro del sistema.
+La relación se implementa mediante la clave foránea `id_pedido` almacenada en la tabla Detalles_Pedido.
 
-- El stock de un producto nunca podrá ser negativo.
+### Productos y Detalles_Pedido
 
+```text
+PRODUCTOS 1 -------- N DETALLES_PEDIDO
+```
+
+Un producto puede aparecer en los detalles de diferentes pedidos, mientras que cada registro de detalle corresponde a un único producto.
+
+La relación se implementa mediante la clave foránea `id_producto` almacenada en la tabla Detalles_Pedido.
+
+Por medio de Detalles_Pedido, la relación muchos a muchos original entre Pedidos y Productos queda representada de la siguiente manera:
+
+```text
+PEDIDOS 1 -------- N DETALLES_PEDIDO N -------- 1 PRODUCTOS
+```
+
+### Clientes y Reseñas
+
+```text
+CLIENTES 1 -------- N RESEÑAS
+```
+
+Un cliente puede realizar múltiples reseñas, mientras que cada reseña pertenece a un único cliente.
+
+La relación se implementa mediante la clave foránea `id_cliente` almacenada en la tabla Reseñas.
+
+### Productos y Reseñas
+
+```text
+PRODUCTOS 1 -------- N RESEÑAS
+```
+
+Un producto puede recibir múltiples reseñas, mientras que cada reseña corresponde a un único producto.
+
+La relación se implementa mediante la clave foránea `id_producto` almacenada en la tabla Reseñas.
+
+## Restricciones Identificadas
+
+Durante el diseño lógico se identificaron las restricciones necesarias para conservar la integridad de la información y cumplir con las reglas de negocio del sistema.
+
+Las principales restricciones son las siguientes:
+
+- Cada tabla deberá poseer una clave primaria.
+- Las claves foráneas deberán conservar la integridad referencial.
+- El correo electrónico de cada cliente deberá ser único.
+- La combinación de nombre y categoría de un producto deberá ser única.
+- La combinación de pedido y producto en Detalles_Pedido deberá ser única.
+- El stock de los productos no podrá ser negativo.
+- La cantidad registrada en un detalle de pedido deberá representar una cantidad válida de unidades.
 - La calificación de una reseña deberá encontrarse entre 1 y 5.
+- Todo pedido deberá estar asociado con un cliente existente.
+- Todo detalle de pedido deberá estar asociado con un pedido y un producto existentes.
+- Toda reseña deberá estar asociada con un cliente y un producto existentes.
+- Un cliente no podrá tener más de cinco pedidos pendientes.
+- Un cliente solamente podrá realizar una reseña de un producto que haya comprado previamente.
 
-- Todo pedido deberá estar asociado a un cliente existente.
+Las restricciones de unicidad identificadas en el modelo lógico se representan mediante índices únicos.
 
-- Todo detalle de pedido deberá pertenecer a un pedido y a un producto registrados.
+Las restricciones simples de dominio e integridad serán implementadas mediante los mecanismos correspondientes del esquema SQL.
 
-- Ninguna clave foránea podrá almacenar valores que hagan referencia a registros inexistentes.
+Las reglas de negocio que requieren consultar información de varias tablas, como limitar la cantidad de pedidos pendientes de un cliente o comprobar que un cliente haya comprado un producto antes de reseñarlo, serán implementadas mediante los mecanismos definidos en la etapa correspondiente del proyecto.
 
-- No será posible registrar un detalle de pedido sin un pedido y un producto previamente registrados.
+## Tipos de Datos y Dominios
+
+Para preparar la posterior implementación de la base de datos en MySQL, se definieron tipos de datos adecuados para los atributos del modelo.
+
+### Identificadores
+
+Las claves primarias y foráneas utilizan el tipo:
+
+```text
+INT
+```
+
+Las claves primarias serán configuradas durante la implementación para generar identificadores únicos de los registros.
+
+### Datos de texto
+
+Los atributos de texto utilizan `VARCHAR` con longitudes definidas de acuerdo con la naturaleza de la información almacenada:
+
+```text
+nombre                  VARCHAR(45)
+correo                  VARCHAR(100)
+telefono                VARCHAR(20)
+direccion               VARCHAR(200)
+descripcion             VARCHAR(255)
+comentario              VARCHAR(255)
+estado                  VARCHAR(20)
+```
+
+El uso de estas longitudes permite almacenar la información requerida por el sistema y mantiene consistencia con el modelo desarrollado en MySQL Workbench.
+
+### Valores monetarios
+
+Los atributos monetarios utilizan:
+
+```text
+DECIMAL(10,2)
+```
+
+Este tipo de dato se utiliza en:
+
+```text
+Productos.precio
+Detalles_Pedido.precio_unitario
+```
+
+El uso de `DECIMAL(10,2)` permite representar valores monetarios con dos posiciones decimales y evita los problemas de precisión asociados con los tipos de punto flotante.
+
+### Cantidades y existencias
+
+Los atributos utilizados para representar cantidades y existencias utilizan:
+
+```text
+INT
+```
+
+Este tipo de dato se utiliza en:
+
+```text
+Productos.stock
+Detalles_Pedido.cantidad
+```
+
+Durante la implementación se establecerán las restricciones necesarias para impedir valores no válidos.
+
+### Fechas
+
+Los atributos correspondientes a fechas utilizan:
+
+```text
+DATE
+```
+
+Este tipo de dato se utiliza en:
+
+```text
+Pedidos.fecha_pedido
+Reseñas.fecha
+```
+
+### Calificaciones
+
+El atributo correspondiente a la calificación utiliza:
+
+```text
+TINYINT
+```
+
+Este tipo de dato se utiliza en:
+
+```text
+Reseñas.calificacion
+```
+
+La calificación deberá restringirse a los valores comprendidos entre 1 y 5.
+
+### Estados de los pedidos
+
+El atributo correspondiente al estado del pedido utiliza:
+
+```text
+VARCHAR(20)
+```
+
+Este tipo de dato se utiliza en:
+
+```text
+Pedidos.estado
+```
+
+Los valores permitidos para representar el estado de un pedido serán:
+
+```text
+pendiente
+enviado
+entregado
+```
+
+La validación de estos valores se establecerá durante la implementación de la base de datos.
 
 ## Justificación del Diseño Lógico
 
-El modelo lógico fue construido a partir del modelo conceptual respetando las reglas de negocio definidas durante la etapa de análisis.
+El modelo lógico fue construido a partir del modelo conceptual y de las reglas de negocio identificadas durante el análisis.
 
-Cada entidad fue transformada en una tabla independiente, evitando redundancia de información y facilitando el mantenimiento de la base de datos.
+Cada entidad fue transformada en una tabla independiente y las relaciones uno a muchos fueron representadas mediante claves foráneas.
 
-Las relaciones fueron implementadas mediante claves foráneas para garantizar la integridad referencial, mientras que la relación muchos a muchos entre pedidos y productos fue resuelta mediante la incorporación de la tabla DetallePedido.
+La relación muchos a muchos entre Pedidos y Productos fue resuelta mediante la tabla Detalles_Pedido, la cual permite registrar los productos incluidos en cada pedido y almacenar los atributos propios de esta relación.
 
-El resultado es un modelo preparado para su implementación en MySQL y compatible con el proceso de normalización en tercera forma normal.
+El modelo evita almacenar información descriptiva de una entidad dentro de otras tablas.
+
+Por ejemplo, Pedidos almacena únicamente la referencia al cliente mediante `id_cliente`, mientras que los datos descriptivos del cliente permanecen en Clientes.
+
+De la misma manera, Productos almacena únicamente `id_categoria`, mientras que el nombre y la descripción de la categoría permanecen en Categorias.
+
+La información correspondiente a los productos incluidos en un pedido no se almacena como un grupo repetitivo dentro de Pedidos. Cada participación se representa mediante un registro independiente en Detalles_Pedido.
+
+Asimismo, el total del pedido no se almacena directamente, debido a que puede obtenerse mediante la suma de la cantidad multiplicada por el precio unitario de los detalles asociados.
+
+Estas decisiones reducen la redundancia de información, evitan posibles inconsistencias y preparan el modelo para la verificación formal de la Primera, Segunda y Tercera Forma Normal.
 
 ## Diagrama Lógico
 
-La siguiente figura muestra el modelo lógico implementado en MySQL Workbench.
+La siguiente figura muestra el modelo lógico desarrollado mediante MySQL Workbench.
 
-![Diagrama lógico del sistema](../Diagramas/Workbench/Modelo_logico.png)
+![Diagrama lógico del sistema](../Diagramas/Workbench/Modelo_Logico.png)
 
-El diagrama lógico muestra las seis tablas que conforman la base de datos, así como las relaciones implementadas mediante claves foráneas.
+El diagrama representa las seis tablas que conforman la base de datos, sus atributos, claves primarias, claves foráneas y relaciones.
 
-Se observa que la relación muchos a muchos entre Pedido y Producto fue resuelta mediante la tabla DetallePedido, mientras que las relaciones Cliente–Pedido, Categoría–Producto y Cliente–Reseña corresponden a relaciones uno a muchos.
+También se incorporaron restricciones de unicidad para representar las claves candidatas identificadas durante el diseño:
+
+```text
+Clientes.correo
+
+Productos(nombre, id_categoria)
+
+Detalles_Pedido(id_pedido, id_producto)
+```
+
+El modelo obtenido constituye la estructura lógica que posteriormente será implementada en MySQL.
 
 ## Conclusión
 
-El diseño lógico permitió transformar el modelo conceptual en un esquema relacional listo para su implementación física.
+El diseño lógico permitió transformar el modelo conceptual en un esquema relacional compuesto por seis tablas relacionadas.
 
-Se definieron las tablas, relaciones, claves y restricciones necesarias para garantizar la integridad de los datos y cumplir con los requisitos funcionales del sistema de gestión de la tienda en línea.
+Durante esta etapa se definieron las tablas, sus atributos, las claves primarias, las claves foráneas y las claves candidatas necesarias para representar la información del sistema.
 
-Este diseño servirá como base para la creación de la base de datos, los procedimientos almacenados, las consultas y las pruebas del sistema.
+La relación muchos a muchos entre Pedidos y Productos fue resuelta mediante la tabla Detalles_Pedido, permitiendo representar correctamente los productos incluidos en cada pedido y almacenar los atributos propios de esta relación.
 
+También se identificaron las restricciones de integridad y las reglas de negocio que deberán ser implementadas en las siguientes etapas del proyecto.
+
+La eliminación del atributo `total` de la tabla Pedidos evita almacenar un valor derivado que puede calcularse a partir de los registros de Detalles_Pedido.
+
+El modelo lógico resultante mantiene correspondencia con el diagrama desarrollado en MySQL Workbench y se encuentra preparado para la verificación formal del proceso de normalización hasta la Tercera Forma Normal.
