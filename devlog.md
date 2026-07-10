@@ -112,7 +112,7 @@ Se elaboró el diagrama EER utilizando MySQL Workbench y se verificó que las re
 Finalmente se documentó el modelo relacional y se identificaron las claves candidatas del diseño.
 
 ## Diseño lógico (Versión final)
-## Día 2
+## Día 2 (Continuación)
 
 ### Objetivo
 Refinar y consolidar el Diseño Lógico (Punto 2.3) del sistema, alineando la estructura relacional con las reglas de negocio y preparando el modelo para su implementación física en MySQL Workbench.
@@ -130,3 +130,39 @@ Refinar y consolidar el Diseño Lógico (Punto 2.3) del sistema, alineando la es
 
 ### Resultado
 El modelo lógico relacional está 100% estructurado, validado y plasmado visualmente en Workbench. El diseño está listo para proceder con la generación de los scripts DDL (SQL) y la posterior documentación formal de la normalización.
+
+# Día 2 (Continuación)
+
+## Normalización del Modelo Relacional
+
+### Actividades realizadas
+
+Se realizó la verificación formal del modelo relacional con el propósito de comprobar su cumplimiento con la Primera, Segunda y Tercera Forma Normal.
+
+- **Identificación de dependencias funcionales:** Se analizaron las dependencias existentes entre las claves y los atributos de las seis tablas del modelo.
+
+- **Verificación de la Primera Forma Normal (1FN):** Se comprobó que todos los atributos almacenan valores atómicos, que no existen grupos repetitivos y que cada registro puede identificarse de manera única.
+
+- **Verificación de la Segunda Forma Normal (2FN):** Se revisó que los atributos no clave dependieran completamente de sus claves correspondientes y que no existieran dependencias parciales.
+
+- **Análisis de claves alternativas compuestas:** Se verificaron específicamente las claves alternativas `(nombre, id_categoria)` de `Productos` y `(id_pedido, id_producto)` de `Detalles_Pedido`.
+
+- **Verificación de la Tercera Forma Normal (3FN):** Se comprobó que no existieran dependencias transitivas indebidas entre atributos no clave.
+
+- **Análisis de la relación muchos a muchos:** Se justificó la resolución de la relación entre `Pedidos` y `Productos` mediante la tabla intermedia `Detalles_Pedido`.
+
+- **Verificación de `Detalles_Pedido`:** Se confirmó el uso de `id_detalle_pedido` como clave primaria y de la combinación `(id_pedido, id_producto)` como clave alternativa protegida mediante una restricción de unicidad.
+
+- **Análisis del atributo derivado `total`:** Se documentó la eliminación del atributo `total` de la tabla `Pedidos`, debido a que puede calcularse mediante la suma de `cantidad * precio_unitario` de los registros correspondientes en `Detalles_Pedido`.
+
+- **Análisis de anomalías:** Se verificó que la estructura normalizada reduzca anomalías de inserción, actualización y eliminación.
+
+- **Documentación:** Se elaboró y finalizó el archivo `04_Normalización.md` con la verificación formal del modelo hasta la Tercera Forma Normal.
+
+### Resultado
+
+Se verificó que las seis tablas del modelo relacional cumplen con la Primera, Segunda y Tercera Forma Normal.
+
+El análisis confirmó que el esquema no presenta grupos repetitivos, dependencias parciales ni dependencias transitivas indebidas. También se comprobó que la relación muchos a muchos entre `Pedidos` y `Productos` está correctamente resuelta mediante `Detalles_Pedido`.
+
+La documentación correspondiente al punto 2.4 (Normalización) quedó finalizada y el proyecto está preparado para continuar con la etapa de implementación de la base de datos en MySQL.
