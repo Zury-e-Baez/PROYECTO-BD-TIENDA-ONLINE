@@ -166,3 +166,115 @@ Se verificó que las seis tablas del modelo relacional cumplen con la Primera, S
 El análisis confirmó que el esquema no presenta grupos repetitivos, dependencias parciales ni dependencias transitivas indebidas. También se comprobó que la relación muchos a muchos entre `Pedidos` y `Productos` está correctamente resuelta mediante `Detalles_Pedido`.
 
 La documentación correspondiente al punto 2.4 (Normalización) quedó finalizada y el proyecto está preparado para continuar con la etapa de implementación de la base de datos en MySQL.
+
+# Día 3
+
+## Implementación de la Base de Datos
+
+### Actividades realizadas
+
+Se inició la implementación física de la base de datos correspondiente al sistema de gestión de la tienda en línea, tomando como referencia obligatoria el diseño lógico previamente validado, el proceso de normalización hasta la Tercera Forma Normal y el diagrama elaborado en MySQL Workbench.
+
+Durante esta etapa se trabajó con MySQL como sistema gestor de bases de datos y se prepararon los scripts SQL necesarios para crear la estructura de la base de datos y poblarla con datos de prueba.
+
+- **Creación del script de la base de datos:** Se creó el archivo `SQL/Scripts/01_creacion_base_datos.sql`, encargado de generar la base de datos `tienda_online` y construir su estructura completa.
+
+- **Creación de la base de datos:** Se implementaron las instrucciones necesarias para eliminar una versión previa de la base de datos, en caso de existir, crear nuevamente el esquema `tienda_online` y establecerlo como base de datos activa.
+
+- **Implementación de las tablas:** Se crearon las seis tablas definidas durante el diseño lógico:
+
+  - `Clientes`.
+  - `Categorias`.
+  - `Productos`.
+  - `Pedidos`.
+  - `Detalles_Pedido`.
+  - `Reseñas`.
+
+- **Implementación de claves primarias:** Se definieron claves primarias para identificar de manera única los registros de cada tabla.
+
+- **Generación automática de identificadores:** Las claves primarias fueron configuradas mediante `AUTO_INCREMENT`, permitiendo que MySQL genere automáticamente los identificadores de los nuevos registros.
+
+- **Implementación de claves foráneas:** Se establecieron las relaciones entre las tablas mediante las claves foráneas correspondientes:
+
+  - `Pedidos.id_cliente` → `Clientes.id_cliente`.
+  - `Productos.id_categoria` → `Categorias.id_categoria`.
+  - `Detalles_Pedido.id_pedido` → `Pedidos.id_pedido`.
+  - `Detalles_Pedido.id_producto` → `Productos.id_producto`.
+  - `Reseñas.id_cliente` → `Clientes.id_cliente`.
+  - `Reseñas.id_producto` → `Productos.id_producto`.
+
+- **Implementación de claves candidatas:** Se trasladaron al esquema físico las claves candidatas identificadas durante el diseño lógico mediante restricciones `UNIQUE`:
+
+  - `Clientes.correo`.
+  - `Productos(nombre, id_categoria)`.
+  - `Detalles_Pedido(id_pedido, id_producto)`.
+
+- **Implementación de restricciones de dominio:** Se agregaron restricciones `CHECK` para conservar la validez de los datos:
+
+  - El precio de un producto no puede ser negativo.
+  - El stock de un producto no puede ser negativo.
+  - La cantidad de un detalle de pedido debe ser mayor que cero.
+  - El precio unitario de un detalle no puede ser negativo.
+  - La calificación de una reseña debe encontrarse entre 1 y 5.
+  - El estado de un pedido solamente puede ser `pendiente`, `enviado` o `entregado`.
+
+- **Implementación de índices:** Se crearon tres índices adicionales para apoyar la optimización de las consultas:
+
+  - `idx_productos_nombre` sobre `Productos(nombre)`.
+  - `idx_productos_categoria` sobre `Productos(id_categoria)`.
+  - `idx_pedidos_cliente` sobre `Pedidos(id_cliente)`.
+
+- **Ejecución del script de creación:** El archivo `01_creacion_base_datos.sql` fue ejecutado completamente en MySQL Workbench.
+
+- **Verificación de la creación:** Se comprobó que la base de datos `tienda_online`, las seis tablas, las restricciones y los tres índices fueran creados correctamente.
+
+- **Registro de evidencia:** Se guardó una captura de pantalla del resultado de la ejecución del script de creación de la base de datos.
+
+- **Creación del script de datos de prueba:** Se creó el archivo `SQL/Datos/02_datos_prueba.sql` para poblar la base de datos con información realista y coherente con el contexto de una tienda en línea de productos electrónicos.
+
+- **Inserción de categorías:** Se registraron 5 categorías de productos electrónicos.
+
+- **Inserción de clientes:** Se registraron 15 clientes con nombres, correos electrónicos, teléfonos y direcciones.
+
+- **Inserción de productos:** Se registraron 30 productos distribuidos entre las categorías disponibles.
+
+- **Inserción de pedidos:** Se registraron 20 pedidos asociados con clientes existentes.
+
+- **Inserción de detalles de pedido:** Se registraron 41 detalles de pedido, superando el mínimo requerido y relacionando correctamente los pedidos con los productos.
+
+- **Inserción de reseñas:** Se registraron 15 reseñas asociadas con clientes y productos existentes.
+
+- **Verificación de identificadores:** Se comprobó que no era necesario proporcionar manualmente los identificadores en las instrucciones `INSERT`, debido a que las claves primarias fueron configuradas mediante `AUTO_INCREMENT`.
+
+- **Verificación de integridad referencial:** Los datos fueron insertados respetando el orden de dependencia entre las tablas, garantizando que las claves foráneas hicieran referencia a registros existentes.
+
+- **Ejecución del script de datos de prueba:** El archivo `02_datos_prueba.sql` fue ejecutado completamente en MySQL Workbench sin errores.
+
+- **Verificación de los datos insertados:** Se ejecutaron consultas `SELECT` sobre las seis tablas para comprobar la existencia y cantidad de los registros almacenados.
+
+- **Resultados de la verificación:** Se obtuvieron los siguientes registros:
+
+  - 5 categorías.
+  - 15 clientes.
+  - 30 productos.
+  - 20 pedidos.
+  - 41 detalles de pedido.
+  - 15 reseñas.
+
+- **Registro de evidencia:** Se guardó una captura de pantalla de las consultas de verificación y de los resultados obtenidos después de poblar la base de datos.
+
+- **Documentación:** Se elaboró y finalizó el archivo `05_Implementación.md`, documentando la creación de la base de datos, las tablas, las restricciones, las claves, los índices, los datos de prueba, la ejecución de los scripts y la verificación de los resultados.
+
+### Resultado
+
+La implementación de la base de datos correspondiente al punto 2.2 del proyecto quedó finalizada.
+
+La base de datos `tienda_online` fue creada correctamente en MySQL y mantiene correspondencia con el diseño lógico, el proceso de normalización y el diagrama desarrollado previamente en MySQL Workbench.
+
+Las seis tablas fueron implementadas con sus respectivas claves primarias, claves foráneas, claves candidatas y restricciones de integridad. También se crearon los tres índices requeridos para apoyar la optimización de consultas.
+
+La base de datos fue poblada con datos de prueba realistas y suficientes para cumplir con los requisitos establecidos. Se registraron 30 productos, 15 clientes, 20 pedidos, 41 detalles de pedido y 15 reseñas, superando los mínimos requeridos para los detalles y las reseñas.
+
+La ejecución de los scripts y las consultas de verificación confirmó que la estructura de la base de datos y los datos de prueba fueron implementados correctamente.
+
+El proyecto queda preparado para continuar posteriormente con la etapa de consultas y procedimientos almacenados.
