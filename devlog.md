@@ -354,3 +354,24 @@ Pendiente:
 - Validación y optimización.
 - Documentación final.
 - Revisión general antes de la entrega.
+
+# Día 5 Punto 2.4
+
+## Validación y optimización
+
+Durante esta sesión se concluyó el apartado correspondiente a la validación y optimización de la base de datos.
+
+### Actividades realizadas
+
+- Se ejecutaron las tres consultas principales utilizando datos de prueba.
+- Se analizó el plan de ejecución de las consultas mediante EXPLAIN.
+- Se verificó el uso correcto de los índices implementados.
+- Se realizaron pruebas negativas sobre los procedimientos almacenados para comprobar el cumplimiento de las reglas de negocio.
+- Se documentaron los resultados obtenidos.
+- Se elaboró el documento "10_Validacion_Optimizacion.md".
+- Se organizaron las evidencias obtenidas durante las pruebas.
+- Se actualizaron el README y la documentación del proyecto.
+
+### Resultado
+
+El punto 2.4 del proyecto quedó concluido satisfactoriamente y la base de datos fue validada tanto funcionalmente como desde el punto de vista del rendimiento.

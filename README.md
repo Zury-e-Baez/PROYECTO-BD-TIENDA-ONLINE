@@ -81,12 +81,38 @@ Diseñar e implementar una base de datos normalizada en MySQL que soporte las op
 - Tres consultas SQL.
 - Ocho procedimientos almacenados.
 - Evidencias de ejecución.
+- Validación y optimización.
 
 ### En proceso
 
-- Validación y optimización.
 - Documentación final.
+Actualmente únicamente resta la integración del informe final y la presentación del proyecto.
 
+## Procedimientos almacenados implementados
+
+El proyecto implementa los ocho procedimientos almacenados solicitados en la especificación del proyecto:
+
+1. Registrar un nuevo pedido validando límite de pedidos pendientes y disponibilidad de stock.
+2. Registrar una reseña únicamente cuando el cliente haya comprado el producto.
+3. Actualizar automáticamente el stock después de registrar un pedido.
+4. Actualizar el estado de un pedido.
+5. Eliminar las reseñas de un producto y recalcular su promedio de calificaciones.
+6. Registrar un nuevo producto evitando duplicados por nombre y categoría.
+7. Actualizar la información de un cliente.
+8. Generar un reporte de productos con stock bajo.
+
+Todos los procedimientos fueron probados utilizando escenarios positivos y negativos para verificar el cumplimiento de las reglas de negocio.
+
+## Validación
+
+La etapa de validación incluye:
+
+- Ejecución de consultas con datos de prueba.
+- Análisis del rendimiento utilizando EXPLAIN.
+- Verificación del uso de índices.
+- Pruebas positivas de los procedimientos almacenados.
+- Pruebas negativas para comprobar el cumplimiento de las reglas de negocio.
+- Propuestas de optimización para futuras versiones.
 
 ## Autor
 
