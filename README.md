@@ -67,13 +67,26 @@ Diseñar e implementar una base de datos normalizada en MySQL que soporte las op
 
 ## Estado del proyecto
 
-- Etapa actual: Diseño y documentación del modelo de datos (Análisis del problema y Diseño conceptual).
+### Finalizado
 
-- Próximos pasos:
-  - Completar la normalización hasta 3FN.
-  - Implementar el modelo en MySQL.
-  - Agregar procedimientos almacenados, vistas y triggers.
----
+- Análisis del problema.
+- Objetivos del proyecto.
+- Modelo Entidad-Relación.
+- Modelo lógico.
+- Normalización a 3FN.
+- Creación de la base de datos.
+- Restricciones.
+- Índices iniciales.
+- Inserción de datos de prueba.
+- Tres consultas SQL.
+- Ocho procedimientos almacenados.
+- Evidencias de ejecución.
+
+### En proceso
+
+- Validación y optimización.
+- Documentación final.
+
 
 ## Autor
 

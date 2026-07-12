@@ -278,3 +278,79 @@ La base de datos fue poblada con datos de prueba realistas y suficientes para cu
 La ejecución de los scripts y las consultas de verificación confirmó que la estructura de la base de datos y los datos de prueba fueron implementados correctamente.
 
 El proyecto queda preparado para continuar posteriormente con la etapa de consultas y procedimientos almacenados.
+
+
+# DevLog
+
+## Día 4 Punto 2.3
+
+### Avance realizado
+
+Durante esta etapa se completó el apartado 2.3 del proyecto correspondiente a consultas SQL y procedimientos almacenados.
+
+### Consultas SQL implementadas
+
+Se desarrollaron y validaron las siguientes consultas:
+
+1. Listado de productos disponibles por categoría ordenados por precio.
+2. Clientes con pedidos pendientes y total de compras realizadas.
+3. Reporte de los cinco productos con mejor calificación promedio en reseñas.
+
+Todas las consultas fueron ejecutadas correctamente utilizando los datos de prueba de la base de datos y se documentaron mediante capturas de evidencia.
+
+### Procedimientos almacenados implementados
+
+Se desarrollaron los ocho procedimientos solicitados en el proyecto:
+
+1. Registrar un nuevo pedido validando:
+   - existencia del cliente;
+   - existencia del producto;
+   - límite máximo de cinco pedidos pendientes;
+   - cantidad válida;
+   - stock suficiente.
+
+   El procedimiento registra el pedido y su detalle utilizando transacciones para garantizar la integridad de la información.
+
+2. Registrar una reseña verificando:
+   - existencia del cliente;
+   - existencia del producto;
+   - calificación válida;
+   - que el cliente haya comprado previamente el producto.
+
+3. Actualizar el stock de un producto después de un pedido.
+
+4. Actualizar el estado de un pedido.
+
+5. Eliminar las reseñas de un producto específico y recalcular el promedio de calificaciones.
+
+6. Registrar un nuevo producto verificando que no exista otro con el mismo nombre dentro de la misma categoría.
+
+7. Actualizar la información de un cliente (teléfono y dirección).
+
+8. Generar un reporte de productos con stock menor a cinco unidades.
+
+### Mejoras incorporadas
+
+Durante la implementación se añadieron mejoras adicionales respecto al requerimiento original:
+
+- Uso de transacciones (START TRANSACTION, COMMIT y ROLLBACK).
+- Manejo de excepciones mediante EXIT HANDLER.
+- Validaciones de reglas de negocio antes de modificar datos.
+- Uso de FOR UPDATE para evitar problemas de concurrencia durante el registro de pedidos y actualización de inventario.
+- Comentarios explicativos para facilitar el mantenimiento del código.
+
+### Evidencias
+
+Cada procedimiento fue ejecutado individualmente utilizando datos de prueba.
+
+Posteriormente se verificó el resultado consultando las tablas correspondientes para confirmar que las modificaciones se realizaron correctamente.
+
+### Estado del proyecto
+
+Al finalizar esta etapa queda concluido el apartado 2.3 del proyecto.
+
+Pendiente:
+
+- Validación y optimización.
+- Documentación final.
+- Revisión general antes de la entrega.
