@@ -50,7 +50,6 @@ Después de definir las entidades y sus relaciones, se identificaron los atribut
 | cantidad        | Número de unidades compradas.                  |
 | precio_unitario | Precio del producto al momento de la venta.    |
 
-Aquí no pongas todavía las claves foráneas. Las agregaremos en el modelo lógico.
 
 ## Entidad Reseña
 

@@ -375,3 +375,24 @@ Durante esta sesión se concluyó el apartado correspondiente a la validación y
 ### Resultado
 
 El punto 2.4 del proyecto quedó concluido satisfactoriamente y la base de datos fue validada tanto funcionalmente como desde el punto de vista del rendimiento.
+
+# Día 5 
+
+## Finalización del proyecto
+
+Durante esta sesión se concluyó el desarrollo del proyecto de bases de datos correspondiente al sistema de gestión para una tienda online.
+
+### Actividades realizadas
+
+- Se finalizaron los ocho procedimientos almacenados.
+- Se validó el funcionamiento de las consultas SQL mediante datos de prueba.
+- Se realizaron pruebas positivas y escenarios negativos sobre los procedimientos almacenados.
+- Se verificó el uso de índices utilizando la instrucción EXPLAIN.
+- Se documentó la etapa de validación y optimización.
+- Se integró el informe final del proyecto.
+- Se organizaron las evidencias obtenidas durante todo el desarrollo.
+- Se revisó la estructura general del repositorio.
+
+### Resultado
+
+Con esta actualización se concluye el desarrollo del proyecto, quedando disponibles los scripts SQL, la documentación técnica, las evidencias de funcionamiento y el informe final para su entrega.

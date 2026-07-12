@@ -46,13 +46,29 @@ Diseñar e implementar una base de datos normalizada en MySQL que soporte las op
 
 ## Estructura del repositorio
 
-- `README.md`: Descripción general del proyecto (este archivo).
-- `docs/`: Documentos de análisis y diseño del proyecto.
-  - `analisis/`: objetivo del sistema, alcance, reglas de negocio.
-  - `diseno_conceptual/`: modelos entidad–relación y justificaciones.
-  - `diseno_logico/`: modelo lógico (EER) y normalización.
-- `sql/`: scripts de creación de la base de datos y carga de datos.
-- `evidencias/`: capturas de pantalla, diagramas y documentos de apoyo.
+## Estructura del proyecto
+
+```
+
+Proyecto BD/
+
+├── Documentación/
+
+├── Diagramas/
+
+├── Evidencias/
+
+├── SQL/
+
+│ ├── Scripts/
+
+│ ├── Datos/
+
+│ ├── Procedures/
+
+├── README.md
+
+└── devlog.md
 
 
 ---
@@ -82,11 +98,9 @@ Diseñar e implementar una base de datos normalizada en MySQL que soporte las op
 - Ocho procedimientos almacenados.
 - Evidencias de ejecución.
 - Validación y optimización.
-
-### En proceso
-
 - Documentación final.
-Actualmente únicamente resta la integración del informe final y la presentación del proyecto.
+
+**Proyecto finalizado.**
 
 ## Procedimientos almacenados implementados
 

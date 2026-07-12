@@ -68,7 +68,9 @@ Además, durante la consulta del inventario se utiliza la cláusula **FOR UPDATE
 
 Durante las pruebas el procedimiento registró correctamente un nuevo pedido y creó automáticamente el detalle correspondiente, devolviendo el identificador generado y el mensaje de confirmación.
 
-**Evidencia:** *(insertar captura correspondiente)*
+**Evidencia:**
+![Prueba 1](../Evidencias/Capturas/Prueba_del_procedimiento_almacenado_1.png)
+
 
 ---
 
@@ -106,7 +108,7 @@ El procedimiento utiliza transacciones para asegurar que la inserción de la res
 
 La reseña fue registrada exitosamente devolviendo el identificador generado y el mensaje de confirmación.
 
-**Evidencia:** *(captura)*
+![Prueba 2](../Evidencias/Capturas/Prueba_del_procedimiento_almacenado_2.png)
 
 ---
 
@@ -133,7 +135,8 @@ Para evitar problemas de concurrencia también se utiliza **FOR UPDATE**, bloque
 
 El inventario fue actualizado correctamente mostrando el stock anterior y el stock resultante.
 
-**Evidencia:** *(captura)*
+**Evidencia:** 
+![Prueba 3](../Evidencias/Capturas/Prueba_del_procedimiento_almacenado_3.png)
 
 ---
 
@@ -157,7 +160,8 @@ Modificar el estado de un pedido durante su ciclo de vida.
 
 El procedimiento modificó correctamente el estado del pedido mostrando tanto el estado anterior como el nuevo estado.
 
-**Evidencia:** *(captura)*
+**Evidencia:**
+![Prueba 4](../Evidencias/Capturas/Prueba_del_procedimiento_almacenado_4.png)
 
 ---
 
@@ -181,7 +185,8 @@ Posteriormente se eliminan las reseñas y se calcula nuevamente el promedio de c
 
 Las reseñas fueron eliminadas correctamente y el procedimiento devolvió el número de registros eliminados.
 
-**Evidencia:** *(captura)*
+**Evidencia:**
+![Prueba 5](../Evidencias/Capturas/Prueba_del_procedimiento_almacenado_5.png)
 
 ---
 
@@ -203,7 +208,8 @@ Antes del registro se valida que:
 
 El nuevo producto fue registrado correctamente devolviendo su identificador.
 
-**Evidencia:** *(captura)*
+**Evidencia:** 
+![Prueba 6](../Evidencias/Capturas/Prueba_del_procedimiento_almacenado_6.png)
 
 ---
 
@@ -225,7 +231,8 @@ Se valida únicamente que el cliente exista antes de modificar:
 
 La información fue actualizada correctamente mostrando los nuevos datos almacenados.
 
-**Evidencia:** *(captura)*
+**Evidencia:** 
+![Prueba 7](../Evidencias/Capturas/Prueba_del_procedimiento_almacenado_7.png)
 
 ---
 
@@ -246,7 +253,8 @@ Los resultados se presentan ordenados por nivel de inventario.
 
 Durante las pruebas no se obtuvieron registros debido a que ningún producto presentaba inventario inferior al límite establecido, lo cual confirma el correcto funcionamiento del procedimiento.
 
-**Evidencia:** *(captura)*
+**Evidencia:** 
+![Prueba 8](../Evidencias/Capturas/Prueba_del_procedimiento_almacenado_8.png)
 
 ---
 
