@@ -659,3 +659,9 @@ Las capturas correspondientes a las consultas SQL, procedimientos almacenados, a
 `Evidencias/Capturas`
 
 Esta organización facilita la consulta de cada una de las etapas desarrolladas y permite localizar rápidamente tanto la documentación como los scripts y las evidencias asociadas.
+
+## Video de presentación
+
+El video de demostración del proyecto se encuentra disponible en el siguiente enlace:
+
+https://drive.google.com/drive/folders/1AsjQFtltrtRVkWww_6AaN_iCvd6iDJeE?usp=sharing

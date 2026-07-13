@@ -128,6 +128,15 @@ La etapa de validación incluye:
 - Pruebas negativas para comprobar el cumplimiento de las reglas de negocio.
 - Propuestas de optimización para futuras versiones.
 
+# Video de presentación
+
+Como parte de la entrega del proyecto se elaboró un video en el que se explica el desarrollo, la estructura del repositorio, el modelo de la base de datos, la implementación en MySQL y una demostración del funcionamiento de las principales funcionalidades.
+
+El video puede consultarse en el siguiente enlace:
+
+**Google Drive:**  
+https://drive.google.com/drive/folders/1AsjQFtltrtRVkWww_6AaN_iCvd6iDJeE?usp=sharing
+
 ## Autor
 
 Zury Elizabeth Bautista Báez
